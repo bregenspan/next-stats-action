@@ -16,23 +16,26 @@ const {
 
 const allowedActions = new Set(['synchronize', 'opened'])
 
+const rootFolder = process.argv[2]
+/*
 if (!allowedActions.has(actionInfo.actionName) && !actionInfo.isRelease) {
   logger(
-    `Not running for ${actionInfo.actionName} event action on repo: ${actionInfo.prRepo} and ref ${actionInfo.prRef}`
+    `Not running for ${actionInfo.actionName} event action on repo: ${
+      actionInfo.prRepo
+    } and ref ${actionInfo.prRef}`
   )
   process.exit(0)
-}
-
-(async () => {
+}*/
+;(async () => {
   try {
     // clone PR/newer repository/ref first to get settings
-    if (!actionInfo.skipClone) {
-      await cloneRepo(actionInfo.prRepo, diffRepoDir)
-      await checkoutRef(actionInfo.prRef, diffRepoDir)
-    }
+    //if (!actionInfo.skipClone) {
+    //  await cloneRepo(actionInfo.prRepo, diffRepoDir)
+    //  await checkoutRef(actionInfo.prRef, diffRepoDir)
+    // }
 
     // load stats config from allowed locations
-    const { statsConfig, relativeStatsAppDir } = loadStatsConfig()
+    const { statsConfig, relativeStatsAppDir } = loadStatsConfig(rootFolder)
 
     // clone main repository/ref
     if (!actionInfo.skipClone) {
@@ -53,7 +56,9 @@ if (!allowedActions.has(actionInfo.actionName) && !actionInfo.isRelease) {
 
         if (!actionInfo.customCommentEndpoint) {
           /* eslint-disable-next-line */
-          actionInfo.commentEndpoint = `https://api.github.com/repos/${statsConfig.mainRepo}/commits/${actionInfo.commitId}/comments`
+          actionInfo.commentEndpoint = `https://api.github.com/repos/${
+            statsConfig.mainRepo
+          }/commits/${actionInfo.commitId}/comments`
         }
       } else if (statsConfig.autoMergeMain) {
         logger('Attempting auto merge of main branch')

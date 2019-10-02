@@ -1,0 +1,12 @@
+name: 'PR stats'
+description: 'Compares stats of a PR with the main branch'
+inputs:
+  folder:
+    description: 'Set subfolder in which to find project to build'
+    required: false
+    default: '/'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.folder }}

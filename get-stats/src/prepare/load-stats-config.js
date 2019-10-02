@@ -3,7 +3,7 @@ const logger = require('../util/logger')
 const { diffRepoDir, allowedConfigLocations } = require('../constants')
 
 // load stats-config
-function loadStatsConfig() {
+function loadStatsConfig(rootFolder) {
   let statsConfig
   let relativeStatsAppDir
 
@@ -12,6 +12,7 @@ function loadStatsConfig() {
       relativeStatsAppDir = configPath
       statsConfig = require(path.join(
         diffRepoDir,
+        rootFolder,
         configPath,
         'stats-config.js'
       ))

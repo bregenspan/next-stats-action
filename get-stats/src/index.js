@@ -17,7 +17,6 @@ const {
 const allowedActions = new Set(['synchronize', 'opened'])
 
 const rootFolder = process.argv[2]
-/*
 if (!allowedActions.has(actionInfo.actionName) && !actionInfo.isRelease) {
   logger(
     `Not running for ${actionInfo.actionName} event action on repo: ${
@@ -25,14 +24,14 @@ if (!allowedActions.has(actionInfo.actionName) && !actionInfo.isRelease) {
     } and ref ${actionInfo.prRef}`
   )
   process.exit(0)
-}*/
+}
 ;(async () => {
   try {
     // clone PR/newer repository/ref first to get settings
-    //if (!actionInfo.skipClone) {
-    //  await cloneRepo(actionInfo.prRepo, diffRepoDir)
-    //  await checkoutRef(actionInfo.prRef, diffRepoDir)
-    // }
+    if (!actionInfo.skipClone) {
+      await cloneRepo(actionInfo.prRepo, diffRepoDir)
+      await checkoutRef(actionInfo.prRef, diffRepoDir)
+    }
 
     // load stats config from allowed locations
     const { statsConfig, relativeStatsAppDir } = loadStatsConfig(rootFolder)

@@ -1,6 +1,6 @@
 const path = require('path')
 
-const workDir = path.join(__dirname, '../.work')
+const workDir = '/github/workspace'
 const mainRepoName = 'main-repo'
 const diffRepoName = 'diff-repo'
 const mainRepoDir = path.join(workDir, mainRepoName)
